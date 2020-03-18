@@ -1,0 +1,59 @@
+require_relative "../../ssr_freelance.rb"
+require_relative './src/common'
+module SsrFreelance
+  module Hooks
+    module Status
+      class SsrFreelanceHookListener < Redmine::Hook::ViewListener
+
+        render_on(:view_issues_new_top, partial: 'freelance/role_fl')
+
+        render_on(:view_issues_bulk_edit_details_bottom, partial: 'freelance/role_fl')
+        render_on(:view_issues_edit_notes_bottom, partial: 'freelance/role_fl')
+
+        render_on(:view_issues_show_details_bottom, partial: 'freelance/role_fl')
+        render_on(:view_issues_form_details_bottom, partial: 'freelance/role_fl')
+
+
+        # controller issue hook create and update
+        include SsrFreelanceHelper
+
+        def controller_issues_save_dry(data = {})
+          data = first_def(data)
+
+        end
+
+        def controller_issues_new_before_save(data = {})
+          controller_issues_save_dry(data)
+        end
+
+        #
+        def controller_issues_edit_before_save(data = {})
+          controller_issues_save_dry(data)
+        end
+
+        #
+        #
+
+        def controller_issues_bulk_edit_before_save(data = {})
+          controller_issues_save_dry(data)
+        end
+
+        private
+
+        def first_def(data)
+          data = freelance_changer(data)
+          data[:issue] = change_value_if_status(data[:issue])
+          data = change_issue_status(data)
+          data
+        end
+
+
+
+
+      end
+    end
+  end
+end
+
+
+
