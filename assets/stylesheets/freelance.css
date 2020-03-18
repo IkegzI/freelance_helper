@@ -1,0 +1,35 @@
+#sunstrike_settnigs_div {
+    padding: 10px 0 15px 30px;
+    background-color: #f6f6f6;
+    border: #e4e4e4 1px outset;
+    margin: 10px;
+}
+
+#sunstrike_settnigs_title {
+    width: 60%;
+    display: inline-block;
+}
+#sunstrike_settnigs_select {
+    width: 15%;
+    display: inline-block;
+}
+.field_with_errors input{
+    border: 1px solid red !important;
+}
+.plitka{
+    padding: 10px;
+    border: 3px;
+    border-style: outset;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #F0F0F0;
+}
+.plitka_dop{
+    margin-top: 10px;
+    padding: 10px;
+    border: 3px;
+    border-style: ridge outset outset ridge;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #F0F0F0;
+}

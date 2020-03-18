@@ -37,7 +37,7 @@ def field_check_complete(data)
   }
 
   data[:issue].custom_field_values.each do |item|
-    if hash.values.include?(item.custom_field.id) and item.value.scan(/[а-яА-Яa-zA-Z]+/).size > 0
+    if hash.values.include?(item.custom_field.id) and item.value.scan(/[0-9а-яА-Яa-zA-Z]+/).size > 0
       check = true
     end
   end

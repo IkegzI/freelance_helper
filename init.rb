@@ -15,22 +15,10 @@ Redmine::Plugin.register :freelance_helper do
 
 
   require_dependency 'ssr_freelance'
-  # path = './lib/patches'
-  # object_to_prepare = Rails.configuration
-  # object_to_prepare.to_prepare do
-  #
-  #   require_relative "#{path}/issues_controller_patch.rb"
-  #
-  #   require_relative "#{path}/issue_patch.rb"
-  #
-  #   require_relative "#{path}/settings_controller_patch.rb"
-  #
-  #   require_relative "#{path}/custom_field_patch.rb"
-  #
-  # end
+
 end
 ActionDispatch::Callbacks.to_prepare do
-  # IssuesController.send(:include, SsrFreelance::Patches::IssuesControllerPatch)
+  IssuesController.send(:include, SsrFreelance::Patches::IssuesControllerPatch)
   Issue.send(:include, SsrFreelance::Patches::IssuePatch)
   SettingsController.send :include, SsrFreelance::Patches::SettingsControllerPatch
 end

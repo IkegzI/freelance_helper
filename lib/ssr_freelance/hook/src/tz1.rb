@@ -25,20 +25,22 @@ def freelance_change_on(data)
   check = false
   data[:issue].custom_field_values.each do |item|
     if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i
-        check = true if item.value == '1' and item.value_was != '1'
-      end
+      check = true if item.value == '1' and item.value_was != '1'
+    end
   end
 end
 
 
 def freelance_off(data)
-  data[:issue].custom_field_values.each do |item|
-    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i
-      unless field_check_complete(data)
-        item.value = '0' if change_assigned(data)
+  if change_assigned(data)
+    data[:issue].custom_field_values.each do |item|
+      if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i
+        unless field_check_complete(data)
+          item.value = '0'
+        end
       end
+      payment_info_destroy(item)
     end
-    payment_info_destroy(item)
   end
   data
 end
