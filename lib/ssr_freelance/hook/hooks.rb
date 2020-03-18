@@ -1,6 +1,7 @@
 require_relative "../../ssr_freelance.rb"
 require_relative './src/common'
 module SsrFreelance
+  include SsrFreelanceHelper
   module Hooks
     module Status
       class SsrFreelanceHookListener < Redmine::Hook::ViewListener
@@ -15,7 +16,6 @@ module SsrFreelance
 
 
         # controller issue hook create and update
-        include SsrFreelanceHelper
 
         def controller_issues_save_dry(data = {})
           data = first_def(data)
