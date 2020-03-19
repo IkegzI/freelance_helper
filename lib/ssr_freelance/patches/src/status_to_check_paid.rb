@@ -67,3 +67,25 @@ def payment_status_on_accrued?
   end
   check
 end
+
+def check_amount_pay
+  check = false
+  paid_value = ''
+  accrued_value = ''
+  paid_id = Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i
+  accrued_id = Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'].to_i
+  custom_field_values.each do |item|
+    if item.custom_field.id == paid_id
+      paid_value = item.value.to_f
+    end
+    if item.custom_field.id == accrued_id
+      accrued_value = item.value.to_f
+    end
+  end
+  if paid_value > accrued_value
+    check = true
+  end
+  check
+end
+
+

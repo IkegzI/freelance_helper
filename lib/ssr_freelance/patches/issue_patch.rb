@@ -39,6 +39,8 @@ module SsrFreelance
               elsif assigned_nil?
                 errors.add :base, :assigned_to_nil
                 check = false
+              elsif check_amount_pay
+                errors.add :base, :status_to_check_payment
               end
             end
           end
