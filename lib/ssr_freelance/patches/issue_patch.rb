@@ -33,6 +33,7 @@ module SsrFreelance
             if freelance_check_complete_fields
               if freelance_role_change_to_off
                 errors.add :base, :stop_change_complete_field
+                check = false
               elsif freelance_role_off
                 errors.add :base, :freelance_check_off_complete_fields
                 check = false
