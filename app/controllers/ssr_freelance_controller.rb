@@ -75,7 +75,7 @@ class SsrFreelanceController < ApplicationController
           user_pay_wallet = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_wallet_issue.id)
         end
         binding.pry
-        if custom_field_type.value == ''
+        if user_pay_type.value == ''
           user_pay_type = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_type_issue.id)
         end
       end
