@@ -39,7 +39,7 @@ def freelance_off(data)
           item.value = '0'
         end
       end
-      payment_info_destroy(item) if change_assigned(data)
+      payment_info_destroy(item) if change_assigned(data) and unchange_payment_info(data)
     end
   end
   data
@@ -66,5 +66,22 @@ def payment_info_destroy(item)
   if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i
     item.value = ''
   end
+end
+
+def unchange_payment_info(data)
+  check = false
+  data[:issue].custom_field_values.each do |item|
+    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i
+      if item.value == item.value_was
+        check = true
+      end
+    end
+    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i
+      if item.value == item.value_was
+        check = true
+      end
+    end
+  end
+  check
 end
 
