@@ -56,6 +56,9 @@ class SsrFreelanceController < ApplicationController
   end
 
   def user_pay_freelance
+    check = false
+    user_pay_wallet = ''
+    user_pay_type = ''
     custom_field_wallet = CustomField.where(type: 'UserCustomField').find(Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_user_field_id'].to_i)
     custom_field_type = CustomField.where(type: 'UserCustomField').find(Setting.plugin_freelance_helper['sunstrike_freelance_pay_user_field_id'].to_i)
     custom_field_wallet_issue = CustomField.where(type: 'IssueCustomField').find(Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i)
@@ -68,8 +71,14 @@ class SsrFreelanceController < ApplicationController
       else
         project = Project.find(params['project_select'].to_i)
       end
-      user_pay_wallet = user.custom_values.find_by(custom_field_id: custom_field_wallet.id) || ''
-      user_pay_type = user.custom_values.find_by(custom_field_id: custom_field_type.id) || ''
+      if project
+        role_ids_custom = SsrFreelanceSetting.all.map { |item| item.role_id }.compact
+        check = (Member.where(user_id: user.id).find_by(project_id: project.id).role_ids.map { |item| true if role_ids_custom.include?(item) }).compact.pop if Member.where(user_id: user.id).find_by(project_id: project.id)
+      end
+      if check
+        user_pay_wallet = user.custom_values.find_by(custom_field_id: custom_field_wallet.id) || ''
+        user_pay_type = user.custom_values.find_by(custom_field_id: custom_field_type.id) || ''
+      end
       if params[:issue_id] != '' and change_assigned_user
         if user_pay_wallet == ''
           user_pay_wallet = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_wallet_issue.id)
@@ -79,15 +88,11 @@ class SsrFreelanceController < ApplicationController
         end
       end
     end
-    if project
-      role_ids_custom = SsrFreelanceSetting.all.map { |item| item.role_id }.compact
-      check = (Member.where(user_id: user.id).find_by(project_id: project.id).role_ids.map { |item| true if role_ids_custom.include?(item) }).compact.pop if Member.where(user_id: user.id).find_by(project_id: project.id)
 
-    end
     # if check != []
-      a << {number: custom_field_wallet_issue.id, value: user_pay_wallet == '' ? '' : user_pay_wallet.value}
-      a << {number: custom_field_type_issue.id, value: user_pay_type == '' ? '' : user_pay_type.value}
-      a << {number: 666, value: check}
+    a << {number: custom_field_wallet_issue.id, value: user_pay_wallet == '' ? '' : user_pay_wallet.value}
+    a << {number: custom_field_type_issue.id, value: user_pay_type == '' ? '' : user_pay_type.value}
+    a << {number: 666, value: check}
     # else
     #   a << {number: custom_field_wallet_issue.id, value: ''}
     #   a << {number: custom_field_type_issue.id, value: ''}
