@@ -214,11 +214,9 @@
                 document.getElementById('issue_custom_field_values_' + answer[1]['number']).value = answer[1]['value'];
                 document.getElementById('issue_custom_field_values_' + answer[1]['number']).removeAttribute('onchange');
                 document.getElementById('issue_custom_field_values_' + answer[1]['number']).removeAttribute('sel');
-
-                if (answer[0]['value'] != "") {
+                console.log(answer);
+                if (answer[2]['value']) {
                     document.getElementById('issue_custom_field_values_' + answer[0]['number']).setAttribute('readonly', 'readonly');
-                }
-                if (answer[1]['value'] != "") {
                     var number_field = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'] %>';
                     number_field = 'issue_custom_field_values_' + number_field;
                     document.getElementById('issue_custom_field_values_' + answer[1]['number']).setAttribute('onchange', 'check_change_value("' + number_field + '","' + sel + '");');

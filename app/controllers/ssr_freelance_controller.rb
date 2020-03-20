@@ -81,11 +81,12 @@ class SsrFreelanceController < ApplicationController
     end
     if project
       role_ids_custom = SsrFreelanceSetting.all.map { |item| item.role_id }.compact
-      check = (Member.where(user_id: user.id).find_by(project_id: project.id).role_ids.map { |item| true if role_ids_custom.include?(item) }).compact if Member.where(user_id: user.id).find_by(project_id: project.id)
+      check = (Member.where(user_id: user.id).find_by(project_id: project.id).role_ids.map { |item| true if role_ids_custom.include?(item) }).compact.pop if Member.where(user_id: user.id).find_by(project_id: project.id)
     end
     # if check != []
       a << {number: custom_field_wallet_issue.id, value: user_pay_wallet == '' ? '' : user_pay_wallet.value}
       a << {number: custom_field_type_issue.id, value: user_pay_type == '' ? '' : user_pay_type.value}
+      a << {number: 666, value: check}
     # else
     #   a << {number: custom_field_wallet_issue.id, value: ''}
     #   a << {number: custom_field_type_issue.id, value: ''}
