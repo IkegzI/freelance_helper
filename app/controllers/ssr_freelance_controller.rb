@@ -159,7 +159,7 @@ class SsrFreelanceController < ApplicationController
   def change_assigned_user
     binding.pry
 
-    Issue.find(params[:issue_id].to_i).assigned_to.id == params[:user_select_id]
+    Issue.find(params[:issue_id].to_i).assigned_to.id == params[:user_select_id].id
   end
 
 
