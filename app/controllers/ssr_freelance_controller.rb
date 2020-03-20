@@ -89,6 +89,7 @@ class SsrFreelanceController < ApplicationController
       a << {number: custom_field_wallet_issue.id, value: user_pay_wallet == '' ? '' : user_pay_wallet.value}
       a << {number: custom_field_type_issue.id, value: user_pay_type == '' ? '' : user_pay_type.value}
       a << {number: 666, value: check}
+    binding.pry
     # else
     #   a << {number: custom_field_wallet_issue.id, value: ''}
     #   a << {number: custom_field_type_issue.id, value: ''}
