@@ -61,7 +61,6 @@ class SsrFreelanceController < ApplicationController
     custom_field_wallet_issue = CustomField.where(type: 'IssueCustomField').find(Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i)
     custom_field_type_issue = CustomField.where(type: 'IssueCustomField').find(Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i)
     a = []
-    binding.pry
     if params['check_user_id']
       user = User.find(params['check_user_id'].to_i)
       if params['project_select'] == ''
@@ -71,7 +70,6 @@ class SsrFreelanceController < ApplicationController
       end
       user_pay_wallet = user.custom_values.find_by(custom_field_id: custom_field_wallet.id) || ''
       user_pay_type = user.custom_values.find_by(custom_field_id: custom_field_type.id) || ''
-      binding.pry
       if params[:issue_id] != ''
         if user_pay_wallet == ''
           user_pay_wallet = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_wallet_issue.id)
