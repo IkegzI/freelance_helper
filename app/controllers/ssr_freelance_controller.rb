@@ -70,7 +70,7 @@ class SsrFreelanceController < ApplicationController
       end
       user_pay_wallet = user.custom_values.find_by(custom_field_id: custom_field_wallet.id) || ''
       user_pay_type = user.custom_values.find_by(custom_field_id: custom_field_type.id) || ''
-      if params[:issue_id] != ''
+      if params[:issue_id] != '' and change_assigned_user
         if user_pay_wallet == ''
           user_pay_wallet = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_wallet_issue.id)
         end
