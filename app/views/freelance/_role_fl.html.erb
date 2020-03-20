@@ -186,7 +186,6 @@
                 }
             }
         );
-
     }
 
     function pay_info() {
@@ -197,6 +196,8 @@
                 check_user_id: document.getElementById('issue_assigned_to_id').value,
                 project: '<%= request.path.split('/')[2] %>',
                 project_id: "<%= project.nil? ? '' : project.id %>",
+                issue_id: "<%= issue.id || '' %>",
+                user_select_id:  document.getElementById('issue_assigned_to_id').value,
                 project_select: function () {
                     if (document.getElementById('issue_project_id') != null) {
                         return document.getElementById('issue_project_id').value

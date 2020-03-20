@@ -70,18 +70,26 @@ class SsrFreelanceController < ApplicationController
       end
       user_pay_wallet = user.custom_values.find_by(custom_field_id: custom_field_wallet.id) || ''
       user_pay_type = user.custom_values.find_by(custom_field_id: custom_field_type.id) || ''
+      if params[:issue_id] != '' and change_assigned_user
+        if user_pay_wallet.value == ''
+          user_pay_wallet = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_wallet_issue.id)
+        end
+        if custom_field_type.value == ''
+          user_pay_type = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_type_issue.id)
+        end
+      end
     end
     if project
       role_ids_custom = SsrFreelanceSetting.all.map { |item| item.role_id }.compact
       check = (Member.where(user_id: user.id).find_by(project_id: project.id).role_ids.map { |item| true if role_ids_custom.include?(item) }).compact if Member.where(user_id: user.id).find_by(project_id: project.id)
     end
-    if check != []
+    # if check != []
       a << {number: custom_field_wallet_issue.id, value: user_pay_wallet == '' ? '' : user_pay_wallet.value}
       a << {number: custom_field_type_issue.id, value: user_pay_type == '' ? '' : user_pay_type.value}
-    else
-      a << {number: custom_field_wallet_issue.id, value: ''}
-      a << {number: custom_field_type_issue.id, value: ''}
-    end
+    # else
+    #   a << {number: custom_field_wallet_issue.id, value: ''}
+    #   a << {number: custom_field_type_issue.id, value: ''}
+    # end
 
 
     respond_to do |format|
@@ -143,6 +151,10 @@ class SsrFreelanceController < ApplicationController
         end
       }
     end
+  end
+
+  def change_assigned_user
+    Issue.find(params[:issue_id].to_i).assigned_to.id == params[:user_select_id]
   end
 
 

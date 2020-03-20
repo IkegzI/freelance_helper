@@ -16,7 +16,7 @@ def freelance_on(data)
         item.value = '1' if item.value_was != '1'
       end
     end
-    payment_info_add(item, data[:issue].assigned_to_id)
+    payment_info_add(item, data[:issue].assigned_to_id) if change_assigned(data)
   end
 end
 
@@ -39,7 +39,7 @@ def freelance_off(data)
           item.value = '0'
         end
       end
-      payment_info_destroy(item)
+      payment_info_destroy(item) if change_assigned(data)
     end
   end
   data

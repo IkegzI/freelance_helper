@@ -10,7 +10,7 @@ def deny_edit_payments_details
       wallet: Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i
   }
   custom_field_values.each do |item|
-    if id_cf.values.include?(item.custom_field.id) and (item.value != item.value_was)
+    if id_cf.values.include?(item.custom_field.id) and (item.value != item.value_was) and item.value_was != ''
       check = true
     end
   end

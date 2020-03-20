@@ -2,6 +2,7 @@ require_relative 'common'
 
 # автоматический расчёт и поставновка суммы в поле Фриланс (Выплачено)
 def change_value_if_status(issue)
+  
   data_cf = {
       status_freelance: '',
       status_freelance_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i,
@@ -15,6 +16,7 @@ def change_value_if_status(issue)
       paid_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i,
       paid_value: ''
   }
+  
   issue.custom_field_values.each do |item|
     if item.custom_field.id == data_cf[:status_freelance_id]
       data_cf[:status_freelance] = item.value.to_i
@@ -43,5 +45,7 @@ def change_value_if_status(issue)
       end
     end
   end
+  
   issue
+  
 end
