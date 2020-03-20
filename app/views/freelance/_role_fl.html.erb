@@ -215,7 +215,7 @@
                 document.getElementById('issue_custom_field_values_' + answer[1]['number']).removeAttribute('onchange');
                 document.getElementById('issue_custom_field_values_' + answer[1]['number']).removeAttribute('sel');
                 console.log(data);
-                if (answer[2]['value']) {
+                if (answer[2]['value'] == true) {
                     document.getElementById('issue_custom_field_values_' + answer[0]['number']).setAttribute('readonly', 'readonly');
                     var number_field = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'] %>';
                     number_field = 'issue_custom_field_values_' + number_field;
