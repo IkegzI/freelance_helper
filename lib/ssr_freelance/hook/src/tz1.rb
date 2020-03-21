@@ -35,8 +35,6 @@ def freelance_off(data)
   if change_assigned(data)
     data[:issue].custom_field_values.each do |item|
       if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i
-        binding.pry
-
         unless field_check_complete(data)
           if payment_data(data)
             item.value = '0'
