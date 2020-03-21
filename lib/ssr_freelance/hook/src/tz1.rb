@@ -24,7 +24,6 @@ end
 def freelance_change_on(data)
   check = true
   field_id = Setting.plugin_freelance_helper['sunstrike_freelance_field_id']
-  binding.pry
   data[:issue].custom_field_values.each do |item|
     if item.custom_field.id == field_id.to_i
       check = false if data[:params][:issue][:custom_field_values][field_id] == '1'
@@ -84,19 +83,16 @@ def payment_info_non_change(data)
   pay_wallet_value = Issue.find(data[:issue].id).custom_field_values.map { |item| item.value if item.custom_field.id == pay_wallet_id }.compact.pop
   data[:issue].custom_field_values.each do |item|
     if item.custom_field.id == pay_issue_id
-      binding.pry
       if item.value == pay_issue_value
         check[0] = true
       end
     end
     if item.custom_field.id == pay_wallet_id
-      binding.pry
       if item.value == pay_wallet_value
         check[1] = true
       end
     end
   end
-  binding.pry
   if check.uniq.size == 1 and check.first
     return true
   else
