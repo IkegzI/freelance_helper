@@ -16,7 +16,7 @@ module SsrFreelance
 
         def ssr_validate
           check = true
-          check_error_role = false
+          check_error_role = true
           # #freelance
           # #Задачу больше делает не фрилансер? Чтобы изменить поле “Делает фрилансер” на “Нет” удалите информацию из полей “Фриланс (начислено)”, “Фриланс (выплачено)” и “Фриланс статус”
           # # роль - фрилансер, изменяем ассоциирующее поле stop_change_complete_field
@@ -26,7 +26,7 @@ module SsrFreelance
           # #пользователь - фрилансер               #не изменилось, значение нет
           if role_frelancer? and freelance_role_check_off
             errors.add :base, :stop_change_field
-            check_error_role = true
+            check_error_role = false
           else
             # Краткое описание: запретить вносить информацию в поля “Фриланс (начислено)”, “Фриланс (выплачено)” и “Фриланс статус”,
             # если параметр “Делает фрилансер” равен “Нет”. Запретить выставлять параметр “Делает фрилансер” на “Нет”,
@@ -67,7 +67,7 @@ module SsrFreelance
           # errors.add :base, :stop_change_payments_details if assigned_nil? and freelance_role_on_without_assigned
           errors.add :base, :stop_change_payments_details_deny if role_frelancer? and deny_edit_payments_details
 
-          errors.add :base, :stop_change_payments_details if payments_details_check_add and freelance_role_off
+          errors.add :base, :stop_change_payments_details if payments_details_check_add and freelance_role_off and check_error_role
         end
       end
     end
