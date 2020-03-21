@@ -44,7 +44,7 @@ def freelance_off(data)
       # if change_assigned(data) and change_payment_data(data)
     end
     data = payment_info_destroy(data)
-  elsif data[:issue].assigned_to_id <= 0
+  elsif data[:issue].assigned_to_id.nil?
     data = payment_info_destroy(data)
   end
   data
