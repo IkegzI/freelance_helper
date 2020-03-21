@@ -66,7 +66,6 @@ module SsrFreelance
           errors.add :base, :assigned_nil_status_on if assigned_nil? and freelance_role_on_without_assigned
           # errors.add :base, :stop_change_payments_details if assigned_nil? and freelance_role_on_without_assigned
           errors.add :base, :stop_change_payments_details_deny if role_frelancer? and deny_edit_payments_details
-
           errors.add :base, :stop_change_payments_details if payments_details_check_add and freelance_role_off and check_error_role
         end
       end
