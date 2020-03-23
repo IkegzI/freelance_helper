@@ -62,11 +62,12 @@ module SsrFreelance
             if check
               if freelance_cash_accrued_empty? and check_error_status
                 errors.add :base, :status_to_check_accrued
+                check_correct = false
               end
               if payment_status_on_paid?
                 errors.add :base, :status_to_check_paid if freelance_cash_paid_empty?
               end
-              if freelance_cash_paid_under_zero?
+              if freelance_cash_paid_under_zero? and check_correct
                 errors.add :base, :status_to_check_paid
               end
             end
