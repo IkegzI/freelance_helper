@@ -19,6 +19,7 @@ module SsrFreelance
           check_error_role = true
           check_error_pay = true
           check_error_status = true
+          check_correct = true
           # #freelance
           # #Задачу больше делает не фрилансер? Чтобы изменить поле “Делает фрилансер” на “Нет” удалите информацию из полей “Фриланс (начислено)”, “Фриланс (выплачено)” и “Фриланс статус”
           # # роль - фрилансер, изменяем ассоциирующее поле stop_change_complete_field
@@ -47,8 +48,10 @@ module SsrFreelance
               elsif check_amount_pay
                 errors.add :base, :status_to_check_payment
                 check_error_status = false
-              elsif freelance_cash_paid_under_zero?
-                errors.add :base, :status_to_check_paid
+              elsif freelance_cash_accrued_under_zero?  and status_payment_freelancer_empty?
+                errors.add :base, :status_to_check_correct_accrued
+              elsif freelance_cash_paid_under_zero? and status_payment_freelancer_empty?
+                errors.add :base, :status_to_check_correct_paid
               end
 
             end
@@ -62,6 +65,9 @@ module SsrFreelance
               end
               if payment_status_on_paid?
                 errors.add :base, :status_to_check_paid if freelance_cash_paid_empty?
+              end
+              if freelance_cash_paid_under_zero?
+                errors.add :base, :status_to_check_paid
               end
             end
           end
