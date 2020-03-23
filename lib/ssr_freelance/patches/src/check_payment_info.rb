@@ -21,7 +21,6 @@ def deny_edit_payments_details
       data_cf[:issue_wallet] = item.value
     end
   end
-  binding.pry
   if data_cf[:issue_payment] != data_cf[:user_payment]
     check = true
   end
