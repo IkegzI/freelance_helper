@@ -33,7 +33,6 @@ module SsrFreelance
             # Краткое описание: запретить вносить информацию в поля “Фриланс (начислено)”, “Фриланс (выплачено)” и “Фриланс статус”,
             # если параметр “Делает фрилансер” равен “Нет”. Запретить выставлять параметр “Делает фрилансер” на “Нет”,
             # если заполнены поля “Фриланс (начислено)”, “Фриланс (выплачено)” и “Фриланс статус”.
-            binding.pry
             if freelance_check_complete_fields
               if freelance_role_change_to_off
                 errors.add :base, :stop_change_complete_field
@@ -49,8 +48,6 @@ module SsrFreelance
                 errors.add :base, :status_to_check_payment
                 check_error_status = false
               elsif freelance_cash_paid_under_zero?
-                binding.pry
-
                 errors.add :base, :status_to_check_paid
               end
 
