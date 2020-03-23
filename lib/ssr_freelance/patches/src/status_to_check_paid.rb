@@ -82,7 +82,7 @@ def check_amount_pay
       accrued_value = item.value.to_f
     end
   end
-  if paid_value > accrued_value
+  if paid_value > accrued_value and paid_value > 0
     check = true
   end
   check
