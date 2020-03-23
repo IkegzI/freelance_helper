@@ -30,6 +30,20 @@ def freelance_cash_paid_empty?
   check
 end
 
+def freelance_cash_paid_under_zero?
+  #sunstrike_freelance_field_paid
+  check = false
+  paid_id = Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i
+  custom_field_values.each do |item|
+    if item.custom_field.id == paid_id
+      if item.value.to_f < 0
+        check = true
+      end
+    end
+  end
+  check
+end
+
 # параметр “Фриланс статус” пустой
 def status_payment_freelancer_empty?
   check = false
