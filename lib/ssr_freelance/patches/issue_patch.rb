@@ -60,7 +60,7 @@ module SsrFreelance
           #settings_sunstrike_freelance_field_status
           unless status_payment_freelancer_empty?
             if check
-              if freelance_cash_accrued_empty? and check_error_status
+              if freelance_cash_accrued_empty? and payment_status_on_accrued? and check_error_status
                 errors.add :base, :status_to_check_accrued
                 check_correct = false
               end
