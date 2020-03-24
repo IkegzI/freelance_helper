@@ -64,8 +64,9 @@ module SsrFreelance
                 errors.add :base, :status_to_check_accrued
                 check_correct = false
               end
-              if payment_status_on_paid?
-                errors.add :base, :status_to_check_paid if freelance_cash_paid_empty?
+              if payment_status_on_paid? and freelance_cash_paid_empty?
+                errors.add :base, :status_to_check_paid
+                check_correct = false
               end
               if freelance_cash_paid_under_zero? and check_correct
                 errors.add :base, :status_to_check_paid
@@ -75,7 +76,7 @@ module SsrFreelance
           unless freelance_cash_accrued_empty?
             errors.add :base, :status_to_check_status_issue if issue_status
           end
-
+          binding.pry
           errors.add :base, :assigned_nil_status_on if assigned_nil? and freelance_role_on_without_assigned and check_error_pay
           # errors.add :base, :stop_change_payments_details if assigned_nil? and freelance_role_on_without_assigned
           errors.add :base, :stop_change_payments_details_deny if role_frelancer? and deny_edit_payments_details
