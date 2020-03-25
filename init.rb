@@ -18,6 +18,7 @@ Redmine::Plugin.register :freelance_helper do
 
 end
 ActionDispatch::Callbacks.to_prepare do
+  ContextMenusController.send(:include, SsrFreelance::Patches::ContextMenusControllerPatch)
   IssuesController.send(:include, SsrFreelance::Patches::IssuesControllerPatch)
   Issue.send(:include, SsrFreelance::Patches::IssuePatch)
   SettingsController.send :include, SsrFreelance::Patches::SettingsControllerPatch
