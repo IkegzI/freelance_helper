@@ -2,9 +2,10 @@ require_relative 'common'
 
 def freelance_changer(data)
   if freelancer?(data)
-    freelance_on(data)
+    ata = freelance_on(data)
   else
-    freelance_off(data)
+    data = freelance_off(data)
+    data = freelance_payment_info_add_with_custom_on(data) if freelance_on_custom(data)
   end
   data
 end
@@ -19,6 +20,27 @@ def freelance_on(data)
     payment_info_add(item, data[:issue].assigned_to_id) if change_assigned(data)
   end
 end
+
+def freelance_on_custom(data)
+  check = false
+  data[:issue].custom_field_values.each do |item|
+    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i
+      if item.value == '1'
+        check = true
+      end
+    end
+  end
+  check
+end
+
+  def freelance_payment_info_add_with_custom_on(data)
+    usr = data[:issue].assigned_to_id
+    data[:issue].custom_field_values.each do |item|
+      payment_info_add(item, usr)
+    end
+    data
+  end
+
 
 
 def freelance_change_on(data)
@@ -45,6 +67,8 @@ def freelance_off(data)
     end
     data = payment_info_destroy(data)
   elsif data[:issue].assigned_to_id.nil?
+    data = payment_info_destroy(data)
+  elsif data[:issue].assigned_to_id and !freelance_on_custom(data)
     data = payment_info_destroy(data)
   end
   data

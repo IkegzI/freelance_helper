@@ -13,14 +13,17 @@
                 document.getElementById(field_status).setAttribute('status_edit', 'need_pay');
             }
             document.getElementById('issue_assigned_to_id').setAttribute('onchange', 'check_db_user()');
+            document.getElementsByClassName('icon-edit')[0].getAttribute('onclick');
             check_db_user();
         }
     );
 
     function set_attr_assigned_to() {
+        console.log('1');
         if (document.getElementById('issue_assigned_to_id') != null) {
+            console.log('2');
             if (document.getElementById('update') != null) {
-
+                console.log('3');
                 if (document.getElementById('update').getAttribute('style') == '') {
                     var number_field = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_id'] %>';
                     number_field = 'issue_custom_field_values_' + number_field;

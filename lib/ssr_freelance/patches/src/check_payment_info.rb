@@ -64,3 +64,4 @@ def payments_details_check_add
   end
   check
 end
+

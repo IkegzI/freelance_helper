@@ -22,4 +22,5 @@ ActionDispatch::Callbacks.to_prepare do
   IssuesController.send(:include, SsrFreelance::Patches::IssuesControllerPatch)
   Issue.send(:include, SsrFreelance::Patches::IssuePatch)
   SettingsController.send :include, SsrFreelance::Patches::SettingsControllerPatch
+  MyController.send :include, SsrFreelance::Patches::MyControllerPatch
 end

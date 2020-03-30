@@ -1,4 +1,17 @@
 <%= render '/freelance/settings/control_js' %>
+<h3>Управление работой</h3>
+<div id="sunstrike_settnigs_div">
+  <div class="plitka">
+    <div id="sunstrike_settnigs_select">
+
+      <%= select_tag('settings[sunstrike_freelance_field_id]',
+                     options_for_select(select_mark_freelance,
+                                        Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i)) %>
+    </div>
+  </div>
+</div>
+
+
 <h3>Настройка</h3>
 <div id="sunstrike_settnigs_div">
   <div class="plitka">
