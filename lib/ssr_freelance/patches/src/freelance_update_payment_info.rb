@@ -73,6 +73,7 @@ def payment_change_on_freelance(user)
         if item.value == '1'
           issue.custom_field_values.each do |item|
             if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_field_status'].to_i
+              binding.pry
               if item.value != Setting.plugin_freelance_helper['sunstrike_freelance_field_status_100']
                 payment_info_change(issue)
               end
