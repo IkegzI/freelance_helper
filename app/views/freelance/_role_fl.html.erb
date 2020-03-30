@@ -19,11 +19,8 @@
     );
 
     function set_attr_assigned_to() {
-        console.log('1');
         if (document.getElementById('issue_assigned_to_id') != null) {
-            console.log('2');
             if (document.getElementById('update') != null) {
-                console.log('3');
                 if (document.getElementById('update').getAttribute('style') == '') {
                     var number_field = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_id'] %>';
                     number_field = 'issue_custom_field_values_' + number_field;
@@ -81,38 +78,38 @@
                                 if (data == '2') {
                                     var check = true;
                                     // статус
-                                    var number_field_ch = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_status'] %>';
-                                    var number_field_status = 'issue_custom_field_values_' + number_field_ch;
+<!--                                    var number_field_ch = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_status'] %>';-->
+<!--                                    var number_field_status = 'issue_custom_field_values_' + number_field_ch;-->
 
-                                    if (document.getElementById(number_field_status).value != "") {
-                                        check = false;
-                                    }
+<!--                                    if (document.getElementById(number_field_status).value != "") {-->
+<!--                                        check = false;-->
+<!--                                    }-->
                                     // начислено
-                                    number_field_ch = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'] %>';
-                                    var number_field_cash_accrued = 'issue_custom_field_values_' + number_field_ch;
-                                    if (Number(document.getElementById(number_field_cash_accrued).value) > 0) {
-                                        check = false;
-                                    }
+<!--                                    number_field_ch = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'] %>';-->
+<!--                                    var number_field_cash_accrued = 'issue_custom_field_values_' + number_field_ch;-->
+<!--                                    if (Number(document.getElementById(number_field_cash_accrued).value) > 0) {-->
+<!--                                        check = false;-->
+<!--                                    }-->
 
                                     // выплачено
-                                    number_field_ch = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'] %>';
-                                    var number_field_cash_pay = 'issue_custom_field_values_' + number_field_ch;
+<!--                                    number_field_ch = '<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'] %>';-->
+<!--                                    var number_field_cash_pay = 'issue_custom_field_values_' + number_field_ch;-->
 
-                                    if (Number(document.getElementById(number_field_cash_pay).value) > 0) {
-                                        check = false;
-                                    }
-                                    if (check) {
+<!--                                    if (Number(document.getElementById(number_field_cash_pay).value) > 0) {-->
+<!--                                        check = false;-->
+<!--                                    }-->
+                                    // if (check) {
                                         document.getElementById(number_field).value = '0';
                                         document.getElementById(number_field).setAttribute('editing', 'yes');
                                         document.getElementById(number_field).removeAttribute('onchange');
                                         document.getElementById(number_field).removeAttribute('onmouseout'); }
-                                     else {
-                                        document.getElementById(number_field).value = '1';
-                                        document.getElementById(number_field).setAttribute('editing', 'yes');
-                                        document.getElementById(number_field).removeAttribute('onchange');
-                                        document.getElementById(number_field).removeAttribute('onmouseout');
-                                    }
-                                }
+                                    //  else {
+                                    //     document.getElementById(number_field).value = '1';
+                                    //     document.getElementById(number_field).setAttribute('editing', 'yes');
+                                    //     document.getElementById(number_field).removeAttribute('onchange');
+                                    //     document.getElementById(number_field).removeAttribute('onmouseout');
+                                    // }
+                                // }
                                 if (data == '3') {
                                     document.getElementById(number_field).value = '1';
                                     document.getElementById(number_field).setAttribute('editing', 'yes');
