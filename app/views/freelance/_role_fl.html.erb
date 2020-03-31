@@ -237,7 +237,8 @@
 
                 document.getElementById('issue_custom_field_values_' + answer[1]['number']).value = answer[1]['value'];
                 if (document.getElementById('wallet_pay') == null) {
-                    document.getElementById('issue_custom_field_values_' + answer[1]['number']).setAttribute('hidden', 'yes');
+                    document.getElementById('issue_custom_field_values_' + answer[1]['number']).style.display='none';
+                    // document.getElementById('issue_custom_field_values_' + answer[1]['number']).setAttribute('hidden', 'yes');
                     document.getElementById('issue_custom_field_values_' + answer[1]['number']).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + answer[1]['value'] + '</span>');
                 } else {
                     document.getElementById('wallet_pay').textContent = answer[1]['value'];
