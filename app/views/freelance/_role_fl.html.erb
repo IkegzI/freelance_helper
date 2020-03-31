@@ -1,3 +1,4 @@
+<% if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0' %>
 <% SsrFreelancePayHelper.check_field_on_pay %>
 <script type="text/javascript">
     setInterval(set_attr_assigned_to, 1000);
@@ -263,3 +264,4 @@
         }
     }
 </script>
+<% end %>

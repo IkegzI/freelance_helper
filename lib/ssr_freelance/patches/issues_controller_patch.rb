@@ -12,7 +12,7 @@ module SsrFreelance
       end
 
       def ssr_show
-        update_info_payment
+        update_info_payment if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0'
         @journals = @issue.visible_journals_with_index
         @changesets = @issue.changesets.visible.preload(:repository, :user).to_a
         @relations = @issue.relations.select {|r| r.other_issue(@issue) && r.other_issue(@issue).visible? }

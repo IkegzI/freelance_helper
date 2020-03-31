@@ -4,14 +4,16 @@
   <div class="plitka">
     <div id="sunstrike_settnigs_select">
 
-      <%= select_tag('settings[sunstrike_freelance_field_id]',
-                     options_for_select(select_mark_freelance,
-                                        Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i)) %>
+      <%= select_tag('settings[sunstrike_freelance_plugin_status]',
+                     options_for_select(ON_OFF_CONST,
+                                        Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'].to_i)) %>
     </div>
   </div>
 </div>
 
-
+<% if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '1' %>
+  <div style=display:none>
+<% end %>
 <h3>Настройка</h3>
 <div id="sunstrike_settnigs_div">
   <div class="plitka">
@@ -79,12 +81,12 @@
       <% end %>
     </div>
     <% if status_select.size > 0 %>
-        <div class="plitka_dop">
-          <h4>Статус по которому разрешаем оплачивать аванс</h4>
-          <%= select_tag("settings[sunstrike_freelance_field_prepayment]",
-                         options_for_select(status_select,
-                                            Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'])) %>
-        </div>
+      <div class="plitka_dop">
+        <h4>Статус по которому разрешаем оплачивать аванс</h4>
+        <%= select_tag("settings[sunstrike_freelance_field_prepayment]",
+                       options_for_select(status_select,
+                                          Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'])) %>
+      </div>
       <div class="plitka_dop">
         <h4>Статус по которому оплачен аванс (50%)</h4>
         <%= select_tag("settings[sunstrike_freelance_field_status_50]",
@@ -97,15 +99,15 @@
                        options_for_select(status_select,
                                           Setting.plugin_freelance_helper['sunstrike_freelance_field_payment'])) %>
       </div>
-        <div class="plitka_dop">
-          <h4>Статус по которому оплачено 100%</h4>
-          <%= select_tag("settings[sunstrike_freelance_field_status_100]",
-                         options_for_select(status_select,
-                                            Setting.plugin_freelance_helper['sunstrike_freelance_field_status_100'])) %>
-        </div>
-      <% end %>
-
+      <div class="plitka_dop">
+        <h4>Статус по которому оплачено 100%</h4>
+        <%= select_tag("settings[sunstrike_freelance_field_status_100]",
+                       options_for_select(status_select,
+                                          Setting.plugin_freelance_helper['sunstrike_freelance_field_status_100'])) %>
       </div>
+    <% end %>
+
+  </div>
   <div class="plitka">
     <h4>Сопоставление полей способа оплаты фрилансеру:</h4>
     <div class="plitka_dop">
@@ -148,7 +150,9 @@
 </div>
 </div>
 
-
+<% if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0' %>
+  </div>
+<% end %>
 <div>
   <% Setting.plugin_freelance_helper %>
 </div>
