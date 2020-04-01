@@ -19,6 +19,7 @@ def freelance_on(data)
     end
     payment_info_add(item, data[:issue].assigned_to_id) if change_assigned(data)
   end
+  data
 end
 
 def freelance_on_custom(data)
