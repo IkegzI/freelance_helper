@@ -40,6 +40,7 @@ class SsrFreelanceController < ApplicationController
       if issue
         if check == 2
           if project.issues.find(issue).custom_values.find_by(custom_field_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i).value.to_i == 1 and project.issues.find(issue).assigned_to.id == user.id
+          # if project.issues.find(issue).custom_values.find_by(custom_field_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i).value.to_i == 1 and project.issues.find(issue).assigned_to.id
             check = 3
           else
             check = 2
