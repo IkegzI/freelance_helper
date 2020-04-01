@@ -16,7 +16,7 @@ def change_value_if_status(issue)
       paid_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i,
       paid_value: ''
   }
-  
+  binding.pry
   issue.custom_field_values.each do |item|
     if item.custom_field.id == data_cf[:status_freelance_id]
       data_cf[:status_freelance] = item.value.to_i
@@ -32,6 +32,8 @@ def change_value_if_status(issue)
       data_cf[:paid_value] = item.value.to_f
     end
   end
+  binding.pry
+
   if data_cf[:status_freelance] == 1
     if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_50']
       if data_cf[:paid_value] <= 0 and data_cf[:accurued_value] > 0
@@ -45,7 +47,8 @@ def change_value_if_status(issue)
       end
     end
   end
-  
+  binding.pry
+
   issue
   
 end
