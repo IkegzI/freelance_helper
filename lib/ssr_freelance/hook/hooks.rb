@@ -41,7 +41,7 @@ module SsrFreelance
           def first_def(data)
             data = freelance_changer(data) if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0'
 
-            data[:issue] = change_value_if_status(data[:issue]) if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0'
+            # data[:issue] = change_value_if_status(data[:issue]) if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0'
 
             data = change_issue_status(data) if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0'
 
