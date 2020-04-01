@@ -2,6 +2,7 @@ require_relative 'common'
 
 # автоматический расчёт и поставновка суммы в поле Фриланс (Выплачено)
 def change_value_if_status(data)
+  binding.pry
   issue = data[:issue]
   binding.pry
   data_cf = {
