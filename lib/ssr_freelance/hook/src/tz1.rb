@@ -2,7 +2,7 @@ require_relative 'common'
 
 def freelance_changer(data)
   if freelancer?(data)
-    ata = freelance_on(data)
+    data = freelance_on(data)
   else
     data = freelance_off(data)
     data = freelance_payment_info_add_with_custom_on(data) if freelance_on_custom(data)

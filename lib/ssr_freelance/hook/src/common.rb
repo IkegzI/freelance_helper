@@ -43,3 +43,19 @@ def field_check_complete(data)
   end
   check
 end
+
+def freelance_custom_field_change(data) # yes
+  fields_ids = SsrFreelanceHelper.mark_custom_field_pay_freelance.map { |item| item.last }
+  data[:issue].custom_field_values.map do |item|
+    if fields_ids.include?(item.custom_field.id)
+      if item.value.to_f > 0
+        if item.value.to_f == item.value.to_i
+          item.value = item.value.to_i.to_s
+        else
+          item.value = item.value.to_f.to_s
+        end
+      end
+    end
+  end
+  data
+end

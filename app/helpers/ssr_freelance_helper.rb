@@ -85,6 +85,24 @@ module SsrFreelanceHelper
     SsrFreelanceHelper.mark_custom_field_freelance.map { |item| [item.name, item.id] if item.name != '<отсутствует>' }
   end
 
+def self.mark_custom_field_pay_freelance
+  a = []
+  if Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'].to_i != -10 and
+      Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'].to_i > 0
+    a << CustomField.where(type: 'IssueCustomField').find(Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'].to_i)
+  end
+  if Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i != -10 and
+      Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i > 0
+    a << CustomField.where(type: 'IssueCustomField').find(Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i)
+  end
+  a.map! { |item| [item.name, item.id] }
+  a.compact
+end
+
+def self.mark_custom_field_freelance_js
+  SsrFreelanceHelper.mark_custom_field_freelance.map { |item| [item.name, item.id] if item.name != '<отсутствует>' }
+end
+
 end
 
 
