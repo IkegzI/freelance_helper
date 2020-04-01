@@ -30,7 +30,7 @@ module SsrFreelance
 
             # #stop_change_field: "Тикет назначен на пользователя, работающего на фрилансе. Нельзя в поле 'Делает фрилансер' установить значение 'Нет'"
             # #пользователь - фрилансер               #не изменилось, значение нет
-            if freelance_check_complete_fields_strings and errors.messages.size == 1
+            if freelance_check_complete_fields_strings and errors.messages.size == 0
               #проверка на внесение буквенных символов в строке
               errors.add :base, :status_to_check_correct_accrued if freelance_check_complete_field_string(accrued_id)
               errors.add :base, :status_to_check_correct_paid if freelance_check_complete_field_string(paid_id)
