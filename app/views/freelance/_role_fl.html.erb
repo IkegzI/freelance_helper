@@ -104,7 +104,7 @@
                                     document.getElementById(number_field).removeAttribute('onmouseout');
                                 }
                             }
-                            pay_info();
+                            payment_info_edit();
                         }
                     }
                 );
@@ -125,13 +125,18 @@
         var pay_wallet_value = document.getElementById(pay_wallet_id).value;
         var pay_payment_value = document.getElementById(pay_payment_id).value;
         if (document.getElementById(freelance_status_id).value != '1') {
+            console.log('freelance_status_id');
             if (pay_payment_value != '') {
+                console.log('pay_payment_value');
+
                 document.getElementById(pay_payment_id).value = '';
                 document.getElementById('account_pay').textContent = '';
 
                 console.log('pay_payment_id = ' + document.getElementById(pay_payment_id).value);
             }
             if (pay_wallet_value != '') {
+                console.log('pay_wallet_value');
+
                 document.getElementById(pay_wallet_id).value = '';
                 document.getElementById('wallet_pay').textContent = '';
 
