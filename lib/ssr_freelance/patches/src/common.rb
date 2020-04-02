@@ -17,6 +17,7 @@ def freelance_role_check_off # yes
       item
     end
   end).compact
+  binding.pry
   if cf.first.value == '0' and assigned_to
     check = true
   end
