@@ -1,3 +1,11 @@
 = freelance_helper
+Установка:
+Шаг 1:
+ скопировать в директорию plugins папку reelance_helper
+ или
+ В директории plugins выполнить команду: git clone https://github.com/IkegzI/freelance_helper
 
-Description goes here
+Шаг 2:
+ Выполнить миграцию командой: rake redmine:plugins:migrate NAME=freelance_helper
+
+ Далее настраиваем плагин для работы, выбирая поля, которые относятся к роли фриланса
