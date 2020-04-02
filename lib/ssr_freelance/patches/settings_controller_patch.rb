@@ -1,4 +1,5 @@
 require_dependency 'settings_controller'
+require_relative '../../ssr_freelance'
 module SsrFreelance
   module Patches
     module SettingsControllerPatch
