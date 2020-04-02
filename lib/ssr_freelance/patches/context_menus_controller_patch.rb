@@ -37,7 +37,6 @@ module SsrFreelance
           custom_fields = @issues.map(&:editable_custom_fields).reduce(:&).reject(&:multiple?).select { |field| field.format.bulk_edit_supported }
           custom_fields.each do |field|
             values = field.possible_values_options(@projects)
-            binding.pry
             if values.present?
               @options_by_custom_field[field] = values
             end
