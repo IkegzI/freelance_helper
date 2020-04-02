@@ -23,7 +23,7 @@
               if (document.getElementById(pay_wallet_id) != null) {
                   var value_field = document.getElementById(pay_payment_id).value;
                   if (document.getElementById('wallet_pay') == null) {
-                      document.getElementById(pay_payment_id).setAttribute('hidden', 'yes');
+                      document.getElementById(pay_wallet_id).setAttribute('hidden', 'yes');
                       document.getElementById(pay_wallet_id).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + value_field + '</span>');
                   } else {
                       document.getElementById('wallet_pay').textContent = value_field;
@@ -32,7 +32,7 @@
               if (document.getElementById(pay_payment_id) != null) {
                   var value_field = document.getElementById(pay_payment_id).value;
                   if (document.getElementById('account_pay') == null) {
-                      document.getElementById(pay_wallet_id).style.display = 'none';
+                      document.getElementById(pay_payment_id).style.display = 'none';
                       document.getElementById(pay_payment_id).parentElement.insertAdjacentHTML('beforeend', '<span id=account_pay>' + value_field + '</span>');
                   } else {
                       document.getElementById('account_pay').textContent = value_field;
