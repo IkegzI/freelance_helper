@@ -26,23 +26,23 @@ module SsrFreelance
         }
 
         @assignables = @issues.map(&:assignable_users).reduce(:&)
-        @trackers = @projects.map {|p| Issue.allowed_target_trackers(p) }.reduce(:&)
-        @versions = @projects.map {|p| p.shared_versions.open}.reduce(:&)
+        @trackers = @projects.map { |p| Issue.allowed_target_trackers(p) }.reduce(:&)
+        @versions = @projects.map { |p| p.shared_versions.open }.reduce(:&)
 
         @priorities = IssuePriority.active.reverse
         @back = back_url
 
         @options_by_custom_field = {}
         if @can[:edit]
-          custom_fields = @issues.map(&:editable_custom_fields).reduce(:&).reject(&:multiple?).select {|field| field.format.bulk_edit_supported}
+          custom_fields = @issues.map(&:editable_custom_fields).reduce(:&).reject(&:multiple?).select { |field| field.format.bulk_edit_supported }
           custom_fields.each do |field|
             values = field.possible_values_options(@projects)
+            binding.pry
             if values.present?
               @options_by_custom_field[field] = values
             end
           end
         end
-
         @safe_attributes = @issues.map(&:safe_attribute_names).reduce(:&)
         render :layout => false
       end
