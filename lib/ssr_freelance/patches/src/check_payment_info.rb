@@ -65,13 +65,13 @@ def payments_details_check_add
         check = true
       end
     end
-    binding.pry
     if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i
       if item.value != ''
         check = true
       end
     end
   end
+  binding.pry
   check
 end
 
