@@ -7,8 +7,8 @@
             var field_status = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_status'] %>";
         var pay_wallet_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'] %>";
         var pay_payment_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'] %>";
-        document.getElementById(pay_wallet_id).setAttribute('hidden', 'yes');
-        document.getElementById(pay_payment_id).style.display='none';
+        // document.getElementById(pay_wallet_id).setAttribute('hidden', 'yes');
+        // document.getElementById(pay_payment_id).style.display='none';
             document.getElementById(field_status).setAttribute('onchange', 'field_role_custom();');
             document.getElementById(field_status).setAttribute('onchange', 'check_pay_cash();');
             if (document.getElementById(field_status).value == 'Надо оплатить аванс') {
