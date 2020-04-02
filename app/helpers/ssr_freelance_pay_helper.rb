@@ -7,8 +7,8 @@ module SsrFreelancePayHelper
 
 
   def self.check_field_on_pay
-    field = Setting.plugin_sunstrike_redmine_freelance_plg['sunstrike_freelance_pay_field_id'].to_i
-    if Setting.plugin_sunstrike_redmine_freelance_plg['sunstrike_freelance_pay_field_id'].to_i != 0
+    field = Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i
+    if Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i != 0
       # unless field_issue = IssueCustomField.find(field)
       unless IssueCustomField.find_by(name: field_issue.name)
         param = {
