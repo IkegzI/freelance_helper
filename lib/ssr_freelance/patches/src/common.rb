@@ -6,9 +6,6 @@ require_relative './check_payment_info'
 require_relative './issue_check'
 
 
-
-
-
 def freelance_role_check_off # yes
   check = false
   id_field_freelance = Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i
@@ -17,9 +14,10 @@ def freelance_role_check_off # yes
       item
     end
   end).compact
-  binding.pry
-  if cf.first.value == '0' and assigned_to
-    check = true
+  if cf.first
+    if cf.first.value == '0' and assigned_to
+      check = true
+    end
   end
   check
 end
