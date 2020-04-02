@@ -5,24 +5,7 @@
 
       $(document).ready(function () {
               var field_status = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_status'] %>";
-              var pay_wallet_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'] %>";
-              var pay_payment_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'] %>";
-              if (document.getElementById(pay_wallet_id) != null) {
-                  if (document.getElementById('wallet_pay') == null) {
-                      document.getElementById(pay_wallet_id).style.display = 'none';
-                      document.getElementById(pay_wallet_id).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + answer[1]['value'] + '</span>');
-                  } else {
-                      document.getElementById('wallet_pay').textContent = answer[1]['value'];
-                  }
-              }
-              if (document.getElementById(pay_payment_id) != null) {
-                  if (document.getElementById('account_pay') == null) {
-                      document.getElementById(pay_payment_id).setAttribute('hidden', 'yes');
-                      document.getElementById(pay_payment_id).parentElement.insertAdjacentHTML('beforeend', '<span id=account_pay>' + answer[0]['value'] + '</span>');
-                  } else {
-                      document.getElementById('account_pay').textContent = answer[0]['value'];
-                  }
-              }
+
               document.getElementById(field_status).setAttribute('onchange', 'field_role_custom();');
               document.getElementById(field_status).setAttribute('onchange', 'check_pay_cash();');
               if (document.getElementById(field_status).value == 'Надо оплатить аванс') {
@@ -35,6 +18,24 @@
               document.getElementById('issue_assigned_to_id').setAttribute('onchange', 'check_db_user()');
               document.getElementsByClassName('icon-edit')[0].getAttribute('onclick');
               check_db_user();
+              var pay_wallet_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'] %>";
+              var pay_payment_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'] %>";
+              if (document.getElementById(pay_wallet_id) != null) {
+                  if (document.getElementById('wallet_pay') == null) {
+                      document.getElementById(pay_payment_id).setAttribute('hidden', 'yes');
+                      document.getElementById(pay_wallet_id).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + answer[1]['value'] + '</span>');
+                  } else {
+                      document.getElementById('wallet_pay').textContent = answer[1]['value'];
+                  }
+              }
+              if (document.getElementById(pay_payment_id) != null) {
+                  if (document.getElementById('account_pay') == null) {
+                      document.getElementById(pay_wallet_id).style.display = 'none';
+                      document.getElementById(pay_payment_id).parentElement.insertAdjacentHTML('beforeend', '<span id=account_pay>' + answer[0]['value'] + '</span>');
+                  } else {
+                      document.getElementById('account_pay').textContent = answer[0]['value'];
+                  }
+              }
           }
       );
 
