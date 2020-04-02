@@ -95,7 +95,7 @@
                                   document.getElementById(number_field).setAttribute('editing', 'no');
                                   document.getElementById(number_field).setAttribute('onchange', 'alert_change_method();');
                                   document.getElementById(number_field).setAttribute('onmouseout', 'onmouseout_set("' + number_field + '")');
-                                  pay_info();
+
                               } else {
                                   if (data == '2') {
                                       var check = true;
@@ -123,9 +123,9 @@
                                       // document.getElementById(number_field).removeAttribute('onchange');
                                       document.getElementById(number_field).setAttribute('onchange', 'payment_info_edit();');
                                       document.getElementById(number_field).removeAttribute('onmouseout');
-                                      pay_info();
                                   }
                               }
+                              payment_info_edit();
                           }
                       }
                   );
@@ -143,9 +143,6 @@
           var pay_wallet_id = 'issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'] %>';
           var pay_payment_id = 'issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'] %>';
           var freelance_status_id = 'issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_id'] %>';
-          if (document.getElementById(freelance_status_id).value == '1') {
-              pay_info();
-          }
           if (document.getElementById(pay_wallet_id) != null) {
               var pay_wallet_value = document.getElementById(pay_wallet_id).value;
               if (document.getElementById(freelance_status_id).value != '1') {
@@ -163,6 +160,10 @@
                       document.getElementById('wallet_pay').textContent = '';
                   }
               }
+          }
+
+          if (document.getElementById(freelance_status_id).value == '1') {
+              pay_info();
           }
 
       }
