@@ -38,6 +38,7 @@ def payment_info_user_data
       payment: Setting.plugin_freelance_helper['sunstrike_freelance_pay_user_field_id'].to_i,
       wallet: Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_user_field_id'].to_i
   }
+  binding.pry
   user_payment = User.find(assigned_to_id).custom_values.find_by(custom_field_id: id_cf[:payment]).value || ''
   user_wallet = User.find(assigned_to_id).custom_values.find_by(custom_field_id: id_cf[:wallet]).value || ''
   {
