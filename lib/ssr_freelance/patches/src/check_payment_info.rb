@@ -58,6 +58,7 @@ def payments_details_check_add
   # Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id']
   # Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id']
   check = false
+  binding.pry
   custom_field_values.each do |item|
     if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i
       if item.value != ''
