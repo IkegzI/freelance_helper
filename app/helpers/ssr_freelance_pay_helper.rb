@@ -7,10 +7,11 @@ module SsrFreelancePayHelper
 
 
   def self.check_field_on_pay
-    field = Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i
-    if Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i != 0
+    # field = Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i
+    # if Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i != 0
       # unless field_issue = IssueCustomField.find(field)
-      unless IssueCustomField.find_by(name: field_issue.name)
+      # field_issue = IssueCustomField.find(field)
+      unless IssueCustomField.find_by(name:"Способ оплаты фрилансеру")
         param = {
             name: "Способ оплаты фрилансеру",
             field_format: "list",
@@ -32,7 +33,7 @@ module SsrFreelancePayHelper
         ucf_pay = UserCustomField.new(param)
         ucf_pay.save
       end
-      unless UserCustomField.find_by(name: field_issue.name)
+      unless UserCustomField.find_by(name: "Способ оплаты фрилансеру")
         param = {
             name: "Способ оплаты фрилансеру",
             field_format: "list",
@@ -98,5 +99,5 @@ module SsrFreelancePayHelper
       end
     end
   end
-end
+# end
 # end
