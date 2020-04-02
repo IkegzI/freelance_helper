@@ -38,13 +38,20 @@ def payment_info_user_data
       payment: Setting.plugin_freelance_helper['sunstrike_freelance_pay_user_field_id'].to_i,
       wallet: Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_user_field_id'].to_i
   }
-  binding.pry
-  user_payment = User.find(assigned_to_id).custom_values.find_by(custom_field_id: id_cf[:payment]).value || ''
-  user_wallet = User.find(assigned_to_id).custom_values.find_by(custom_field_id: id_cf[:wallet]).value || ''
+  user_payment = user_custom_field_exists?(id_cf[:payment])
+  user_wallet = user_custom_field_exists?(id_cf[:wallet])
   {
       user_payment: user_payment,
       user_wallet: user_wallet
   }
+end
+
+def user_custom_field_exists?(field)
+  unless User.find(assigned_to_id).custom_values.find_by(custom_field_id: field).nil?
+     User.find(assigned_to_id).custom_values.find_by(custom_field_id: field).value
+   else
+     ''
+   end
 end
 
 def payments_details_check_add
