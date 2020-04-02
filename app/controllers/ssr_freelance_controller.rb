@@ -7,12 +7,12 @@ class SsrFreelanceController < ApplicationController
     if a
       a.destroy
     end
-    redirect_to plugin_settings_path('sunstrike_redmine_freelance_plg')
+    redirect_to plugin_settings_path('freelance_helper')
   end
 
   def add
     SsrFreelanceSetting.create(role_id: request.url.split("/").last.to_i, freelance_role: true)
-    redirect_to plugin_settings_path('sunstrike_redmine_freelance_plg')
+    redirect_to plugin_settings_path('freelance_helper')
   end
 
   def user_role_freelance?
