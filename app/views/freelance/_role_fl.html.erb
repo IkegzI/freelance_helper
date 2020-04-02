@@ -24,9 +24,9 @@
                   var value_field = document.getElementById(pay_payment_id).value;
                   if (document.getElementById('wallet_pay') == null) {
                       document.getElementById(pay_payment_id).setAttribute('hidden', 'yes');
-                      document.getElementById(pay_wallet_id).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + answer[1]['value'] + '</span>');
+                      document.getElementById(pay_wallet_id).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + value_field + '</span>');
                   } else {
-                      document.getElementById('wallet_pay').textContent = answer[1]['value'];
+                      document.getElementById('wallet_pay').textContent = value_field;
                   }
               }
               if (document.getElementById(pay_payment_id) != null) {
