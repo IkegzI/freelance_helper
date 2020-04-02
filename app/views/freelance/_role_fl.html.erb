@@ -249,6 +249,7 @@
               cache: false,
               success: function (data) {
                   var answer = JSON.parse(data);
+                  console.log(data);
                   if (document.getElementById('issue_custom_field_values_' + answer[1]['number']) != null) {
                       var sel = document.getElementById('issue_custom_field_values_' + answer[1]['number']).value = answer[1]['value'];
                   }
@@ -256,7 +257,7 @@
                       document.getElementById('issue_custom_field_values_' + answer[0]['number']).value = answer[0]['value'];
                       if (document.getElementById('account_pay') == null) {
                           document.getElementById('issue_custom_field_values_' + answer[0]['number']).setAttribute('hidden', 'yes');
-                          document.getElementById('issue_custom_field_values_' + answer[0]['number']).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + answer[0]['value'] + '</span>');
+                          document.getElementById('issue_custom_field_values_' + answer[0]['number']).parentElement.insertAdjacentHTML('beforeend', '<span id=account_pay>' + answer[0]['value'] + '</span>');
                       } else {
                           document.getElementById('account_pay').textContent = answer[0]['value'];
                       }
@@ -268,7 +269,7 @@
                       if (document.getElementById('wallet_pay') == null) {
                           document.getElementById('issue_custom_field_values_' + answer[1]['number']).style.display = 'none';
                           // document.getElementById('issue_custom_field_values_' + answer[1]['number']).setAttribute('hidden', 'yes');
-                          document.getElementById('issue_custom_field_values_' + answer[1]['number']).parentElement.insertAdjacentHTML('beforeend', '<span id=account_pay>' + answer[1]['value'] + '</span>');
+                          document.getElementById('issue_custom_field_values_' + answer[1]['number']).parentElement.insertAdjacentHTML('beforeend', '<span id=wallet_pay>' + answer[1]['value'] + '</span>');
                       } else {
                           document.getElementById('wallet_pay').textContent = answer[1]['value'];
                       }
