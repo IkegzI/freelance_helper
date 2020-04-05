@@ -18,7 +18,6 @@ def deny_edit_payments_details
       data_cf[:issue_payment] = item.value
     end
     if id_cf[:wallet] == item.custom_field_id
-      binding.pry
       data_cf[:issue_wallet] = item.value
     end
   end
@@ -26,12 +25,10 @@ def deny_edit_payments_details
   if data_cf[:issue_payment] != data_cf[:user_payment]
     check = true
   end
-  binding.pry
 
   if data_cf[:issue_wallet] != data_cf[:user_wallet]
     check = true
   end
-  binding.pry
 
   # if (item.value != item.value_was) and item.value_was != ''
   #   check = true
