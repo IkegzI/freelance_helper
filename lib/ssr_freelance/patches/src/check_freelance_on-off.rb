@@ -71,8 +71,12 @@ def freelance_role_on_without_assigned # yes
       item
     end
   end).compact
-  if cf.first.value == '1'
-    check = true
+  begin
+    if cf.first.value == '1'
+      check = true
+    end
+  rescue
+    puts 'Value is null. Task is not assigned to?'
   end
   check
 end
