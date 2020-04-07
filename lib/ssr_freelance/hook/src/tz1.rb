@@ -75,7 +75,7 @@ def freelance_off(data)
 end
 
 def change_assigned(data)
-  if data[:issue].assigned_to_id.to_i > 0
+  if data[:issue].assigned_to_id.to_i > 0 and Issue.find(data[:issue].id).assigned_to_id.to_i > 0
     data[:issue].assigned_to_id != Issue.find(data[:issue].id).assigned_to_id
   end
 end
