@@ -17,7 +17,9 @@
                   }
               }
               document.getElementById('issue_assigned_to_id').setAttribute('onchange', 'check_db_user()');
-              document.getElementsByClassName('icon-edit')[0].getAttribute('onclick');
+              if (document.getElementsByClassName('icon-edit')[0] != null) {
+                  document.getElementsByClassName('icon-edit')[0].getAttribute('onclick');
+              }
               check_db_user();
               var pay_wallet_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'] %>";
               var pay_payment_id = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'] %>";
