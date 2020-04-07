@@ -34,14 +34,13 @@ def freelance_on_custom(data)
   check
 end
 
-  def freelance_payment_info_add_with_custom_on(data)
-    usr = data[:issue].assigned_to_id
-    data[:issue].custom_field_values.each do |item|
-      payment_info_add(item, usr)
-    end
-    data
+def freelance_payment_info_add_with_custom_on(data)
+  usr = data[:issue].assigned_to_id
+  data[:issue].custom_field_values.each do |item|
+    payment_info_add(item, usr)
   end
-
+  data
+end
 
 
 def freelance_change_on(data)
@@ -76,7 +75,9 @@ def freelance_off(data)
 end
 
 def change_assigned(data)
-  data[:issue].assigned_to_id != Issue.find(data[:issue].id).assigned_to_id
+  if data[:issue].assigned_to_id.to_i > 0
+    data[:issue].assigned_to_id != Issue.find(data[:issue].id).assigned_to_id
+  end
 end
 
 def payment_info_add(item, usr)
