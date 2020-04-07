@@ -81,11 +81,13 @@ def change_assigned(data)
 end
 
 def payment_info_add(item, usr)
-  if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i and item.value_was = ''
-    item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_user_field_id'].to_i }.compact.first
-  end
-  if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i and item.value_was = ''
-    item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_user_field_id'].to_i }.compact.first
+  unless usr.nil?
+    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i and item.value_was = ''
+      item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_user_field_id'].to_i }.compact.first
+    end
+    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i and item.value_was = ''
+      item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_user_field_id'].to_i }.compact.first
+    end
   end
   item
 end
