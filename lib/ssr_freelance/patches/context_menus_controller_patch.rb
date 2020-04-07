@@ -34,7 +34,9 @@ module SsrFreelance
 
         @options_by_custom_field = {}
         if @can[:edit]
-          custom_fields = @issues.map(&:editable_custom_fields).reduce(:&).reject(&:multiple?).select { |field| field.format.bulk_edit_supported }
+          cf_ids = []
+          cf_ids << Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i
+          custom_fields = @issues.map(&:editable_custom_fields).reduce(:&).reject(&:multiple?).select { |field| field.format.bulk_edit_supported unless cf_ids.include?(field.id)}
           custom_fields.each do |field|
             values = field.possible_values_options(@projects)
             if values.present?
