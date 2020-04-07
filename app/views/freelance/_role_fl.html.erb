@@ -8,13 +8,13 @@
               if (document.getElementById(field_status) != null) {
                   document.getElementById(field_status).setAttribute('onchange', 'field_role_custom();');
                   document.getElementById(field_status).setAttribute('onchange', 'check_pay_cash();');
-              }
-              if (document.getElementById(field_status).value == 'Надо оплатить аванс') {
-                  document.getElementById(field_status).setAttribute('status_edit', 'need_pay');
-              }
+                  if (document.getElementById(field_status).value == 'Надо оплатить аванс') {
+                      document.getElementById(field_status).setAttribute('status_edit', 'need_pay');
+                  }
 
-              if (document.getElementById(field_status).value == 'Надо оплатить все') {
-                  document.getElementById(field_status).setAttribute('status_edit', 'need_pay');
+                  if (document.getElementById(field_status).value == 'Надо оплатить все') {
+                      document.getElementById(field_status).setAttribute('status_edit', 'need_pay');
+                  }
               }
               document.getElementById('issue_assigned_to_id').setAttribute('onchange', 'check_db_user()');
               document.getElementsByClassName('icon-edit')[0].getAttribute('onclick');
