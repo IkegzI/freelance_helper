@@ -5,9 +5,10 @@
 
       $(document).ready(function () {
               var field_status = "issue_custom_field_values_<%= Setting.plugin_freelance_helper['sunstrike_freelance_field_status'] %>";
-
-              document.getElementById(field_status).setAttribute('onchange', 'field_role_custom();');
-              document.getElementById(field_status).setAttribute('onchange', 'check_pay_cash();');
+              if (document.getElementById(field_status) != null) {
+                  document.getElementById(field_status).setAttribute('onchange', 'field_role_custom();');
+                  document.getElementById(field_status).setAttribute('onchange', 'check_pay_cash();');
+              }
               if (document.getElementById(field_status).value == 'Надо оплатить аванс') {
                   document.getElementById(field_status).setAttribute('status_edit', 'need_pay');
               }
