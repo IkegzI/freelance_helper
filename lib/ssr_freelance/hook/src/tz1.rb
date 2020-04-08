@@ -34,14 +34,13 @@ def freelance_on_custom(data)
   check
 end
 
-  def freelance_payment_info_add_with_custom_on(data)
-    usr = data[:issue].assigned_to_id
-    data[:issue].custom_field_values.each do |item|
-      payment_info_add(item, usr)
-    end
-    data
+def freelance_payment_info_add_with_custom_on(data)
+  usr = data[:issue].assigned_to_id
+  data[:issue].custom_field_values.each do |item|
+    payment_info_add(item, usr)
   end
-
+  data
+end
 
 
 def freelance_change_on(data)
@@ -76,15 +75,19 @@ def freelance_off(data)
 end
 
 def change_assigned(data)
-  data[:issue].assigned_to_id != Issue.find(data[:issue].id).assigned_to_id
+  if data[:issue].assigned_to_id.to_i > 0 and data[:issue].id.to_i > 0
+    data[:issue].assigned_to_id != Issue.find(data[:issue].id).assigned_to_id
+  end
 end
 
 def payment_info_add(item, usr)
-  if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i and item.value_was = ''
-    item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_user_field_id'].to_i }.compact.first
-  end
-  if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i and item.value_was = ''
-    item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_user_field_id'].to_i }.compact.first
+  unless usr.nil?
+    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i and item.value_was = ''
+      item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_user_field_id'].to_i }.compact.first
+    end
+    if item.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i and item.value_was = ''
+      item.value = User.find(usr).custom_field_values.map { |i| i.value if i.custom_field.id == Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_user_field_id'].to_i }.compact.first
+    end
   end
   item
 end

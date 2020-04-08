@@ -6,6 +6,6 @@
  В директории plugins выполнить команду: git clone https://github.com/IkegzI/freelance_helper
 
 Шаг 2:
- Выполнить миграцию командой: rake redmine:plugins:migrate NAME=freelance_helper
+ Выполнить миграцию командой:  rake redmine:plugins:migrate NAME=freelance_helper RAILS_ENV=production
 
  Далее настраиваем плагин для работы, выбирая поля, которые относятся к роли фриланса

@@ -14,6 +14,7 @@ def freelance_role_change_to_off # yes
   end
   check
 end
+
 # назначение фрилансеру, переключение на on
 def freelance_role_change_to_on # yes
   check = false
@@ -28,6 +29,7 @@ def freelance_role_change_to_on # yes
   end
   check
 end
+
 # назначение фрилансеру off
 def freelance_role_off # yes
   check = false
@@ -37,8 +39,10 @@ def freelance_role_off # yes
       item
     end
   end).compact
-  if cf.first.value == '0' and assigned_to
-    check = true
+  unless assigned_to.nil?
+    if cf.first.value == '0'
+      check = true
+    end
   end
   check
 end
@@ -67,8 +71,12 @@ def freelance_role_on_without_assigned # yes
       item
     end
   end).compact
-  if cf.first.value == '1'
-    check = true
+  begin
+    if cf.first.value == '1'
+      check = true
+    end
+  rescue
+    puts 'Value is null. Task is not assigned to?'
   end
   check
 end
