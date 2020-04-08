@@ -37,7 +37,6 @@ def change_value_if_status(data)
       item.value = item.value.to_f
     end
   end
-  binding.pry
 
   if data_cf[:status_freelance] == 1
     unless data_cf[:paid_value_edit?]

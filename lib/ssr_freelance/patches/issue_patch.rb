@@ -72,13 +72,10 @@ module SsrFreelance
                     check_correct = false
                   end
                   if payment_status_on_paid? and freelance_cash_paid_empty?
-                    binding.pry
                     errors.add :base, :status_to_check_paid
                     check_correct = false
                   end
                   if freelance_cash_paid_under_zero? and check_correct
-                    binding.pry
-
                     errors.add :base, :status_to_check_paid
                   end
                 end
