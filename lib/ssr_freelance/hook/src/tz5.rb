@@ -31,6 +31,7 @@ def change_value_if_status(data)
       data_cf[:paid_value] = item.value.to_f
     end
   end
+  binding.pry
 
   if data_cf[:status_freelance] == 1
     if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_50']
