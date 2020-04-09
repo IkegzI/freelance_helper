@@ -2,7 +2,6 @@ require_relative 'common'
 
 # автоматический расчёт и поставновка суммы в поле Фриланс (Выплачено)
 def change_value_if_status(data)
-  binding.pry
   issue = data[:issue]
   data_cf = {
       status_freelance: '',
@@ -39,19 +38,13 @@ def change_value_if_status(data)
     end
   end
 
-<<<<<<< HEAD
-  if data_cf[:status_freelance] == 1 and data[:controller].action_name != "update"
-    if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_50']
-      if data_cf[:paid_value] <= 0 and data_cf[:accurued_value] > 0
-        issue.custom_field_values.each { |item| item.value = data_cf[:accurued_value] * 0.5 if item.custom_field.id == data_cf[:paid_id] }
-=======
   if data_cf[:status_freelance] == 1
-    unless data_cf[:paid_value_edit?]
+    unless data_cf[:paid_value_edit?] and data[:controller].action_name  == 'update'
+
       if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_50']
         if data_cf[:paid_value] <= 0 and data_cf[:accurued_value] > 0
           issue.custom_field_values.each { |item| item.value = data_cf[:accurued_value] * 0.5 if item.custom_field.id == data_cf[:paid_id] }
         end
->>>>>>> a95e7ed13995761eb8796e123d5878656e0eb28d
       end
 
       if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_payment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_100']
@@ -59,9 +52,9 @@ def change_value_if_status(data)
           issue.custom_field_values.each { |item| item.value = data_cf[:accurued_value] if item.custom_field.id == data_cf[:paid_id] }
         end
       end
+
     end
   end
   data[:issue] = issue
   data
-
 end
