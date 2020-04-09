@@ -9,13 +9,15 @@ def change_value_if_status(data)
       status_freelance_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_id'].to_i,
       accurued_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'].to_i,
       accurued_value: '',
+      accurued_value_edit?: false,
 
       status_payment_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_status'].to_i,
       status_payment_value: '',
       status_payment_was_value: '',
 
       paid_id: Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i,
-      paid_value: ''
+      paid_value: '',
+      paid_value_edit?: false
   }
   issue.custom_field_values.each do |item|
     if item.custom_field.id == data_cf[:status_freelance_id]
@@ -23,6 +25,8 @@ def change_value_if_status(data)
     end
     if item.custom_field.id == data_cf[:accurued_id]
       data_cf[:accurued_value] = item.value.to_f
+      data_cf[:accurued_value_edit?] = true unless item.value == item.value_was
+      item.value = item.value.to_f
     end
     if item.custom_field.id == data_cf[:status_payment_id]
       data_cf[:status_payment_was_value] = item.value_was
@@ -30,23 +34,34 @@ def change_value_if_status(data)
     end
     if item.custom_field.id == data_cf[:paid_id]
       data_cf[:paid_value] = item.value.to_f
+      data_cf[:paid_value_edit?] = true unless item.value == item.value_was
+      item.value = item.value.to_f
     end
   end
 
+<<<<<<< HEAD
   if data_cf[:status_freelance] == 1 and data[:controller].action_name != "update"
     if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_50']
       if data_cf[:paid_value] <= 0 and data_cf[:accurued_value] > 0
         issue.custom_field_values.each { |item| item.value = data_cf[:accurued_value] * 0.5 if item.custom_field.id == data_cf[:paid_id] }
+=======
+  if data_cf[:status_freelance] == 1
+    unless data_cf[:paid_value_edit?]
+      if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_prepayment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_50']
+        if data_cf[:paid_value] <= 0 and data_cf[:accurued_value] > 0
+          issue.custom_field_values.each { |item| item.value = data_cf[:accurued_value] * 0.5 if item.custom_field.id == data_cf[:paid_id] }
+        end
+>>>>>>> a95e7ed13995761eb8796e123d5878656e0eb28d
       end
-    end
 
-    if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_payment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_100']
-      if (data_cf[:accurued_value] > 0 and data_cf[:paid_value] < data_cf[:accurued_value]) and data_cf[:accurued_value] > 0
-        issue.custom_field_values.each { |item| item.value = data_cf[:accurued_value] if item.custom_field.id == data_cf[:paid_id] }
+      if data_cf[:status_payment_was_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_payment'] and data_cf[:status_payment_value] == Setting.plugin_freelance_helper['sunstrike_freelance_field_status_100']
+        if (data_cf[:accurued_value] > 0 and data_cf[:paid_value] < data_cf[:accurued_value]) and data_cf[:accurued_value] > 0
+          issue.custom_field_values.each { |item| item.value = data_cf[:accurued_value] if item.custom_field.id == data_cf[:paid_id] }
+        end
       end
     end
   end
   data[:issue] = issue
   data
-  
+
 end
