@@ -7,10 +7,6 @@ module SsrFreelancePayHelper
 
 
   def self.check_field_on_pay
-    # field = Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i
-    # if Setting.plugin_freelance_helper['sunstrike_freelance_pay_field_id'].to_i != 0
-      # unless field_issue = IssueCustomField.find(field)
-      # field_issue = IssueCustomField.find(field)
       unless IssueCustomField.find_by(name:"Способ оплаты фрилансеру")
         param = {
             name: "Способ оплаты фрилансеру",
@@ -99,5 +95,3 @@ module SsrFreelancePayHelper
       end
     end
   end
-# end
-# end

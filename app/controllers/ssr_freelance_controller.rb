@@ -94,24 +94,11 @@ class SsrFreelanceController < ApplicationController
         end
 
       end
-      # if params[:issue_id] != '' and change_assigned_user
-      # if params[:issue_id] != ''
-      #   if user_pay_wallet == ''
-      #     user_pay_wallet = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_wallet_issue.id)
-      #   end
-      #   if user_pay_type == ''
-      #     user_pay_type = Issue.find(params[:issue_id]).custom_values.find_by(custom_field_id: custom_field_type_issue.id)
-      #   end
-      # end
+
     end
-    # if check != []
     a << {number: custom_field_wallet_issue.id, value: user_pay_wallet == '' ? '' : user_pay_wallet.value}
     a << {number: custom_field_type_issue.id, value: user_pay_type == '' ? '' : user_pay_type.value}
     a << {number: 666, value: check}
-    # else
-    #   a << {number: custom_field_wallet_issue.id, value: ''}
-    #   a << {number: custom_field_type_issue.id, value: ''}
-    # end
 
 
     respond_to do |format|
@@ -178,32 +165,4 @@ class SsrFreelanceController < ApplicationController
   def change_assigned_user
     Issue.find(params[:issue_id].to_i).assigned_to.id == params[:user_select_id].to_i
   end
-
-  # def payment_info_non_change(issue)
-  #   check = []
-  #   check[0] = false
-  #   pay_issue_id = Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id'].to_i
-  #   pay_wallet_id = Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id'].to_i
-  #   pay_issue_value = Issue.find(issue.id).custom_field_values.map { |item| item.value if item.custom_field.id == pay_issue_id }.compact.pop
-  #   pay_wallet_value = Issue.find(issue.id).custom_field_values.map { |item| item.value if item.custom_field.id == pay_wallet_id }.compact.pop
-  #   issue.custom_field_values.each do |item|
-  #     if item.custom_field.id == pay_issue_id
-  #       if item.value.to_i != 0
-  #         check[0] = true
-  #       end
-  #     end
-  #     if item.custom_field.id == pay_wallet_id
-  #       if item.value == pay_wallet_value
-  #         check[1] = true
-  #       end
-  #     end
-  #   end
-  #   if check.uniq.size == 1 and check.first
-  #     return true
-  #   else
-  #     return false
-  #   end
-  # end
-
-
 end

@@ -23,10 +23,6 @@ module SsrFreelance
             check_correct = true
             accrued_id = Setting.plugin_freelance_helper['sunstrike_freelance_field_accrued'].to_i
             paid_id = Setting.plugin_freelance_helper['sunstrike_freelance_field_paid'].to_i
-            # #freelance
-            # #Задачу больше делает не фрилансер? Чтобы изменить поле “Делает фрилансер” на “Нет” удалите информацию из полей “Фриланс (начислено)”, “Фриланс (выплачено)” и “Фриланс статус”
-            # # роль - фрилансер, изменяем ассоциирующее поле stop_change_complete_field
-            # errors.add :base, :stop_change_complete_field if freelance_check_complete_fields and freelance_role_check_change_turn_off and !(freelance_role_check) #freelance_check_off_complete_fields
 
             # #stop_change_field: "Тикет назначен на пользователя, работающего на фрилансе. Нельзя в поле 'Делает фрилансер' установить значение 'Нет'"
             # #пользователь - фрилансер               #не изменилось, значение нет
@@ -84,7 +80,6 @@ module SsrFreelance
                 errors.add :base, :status_to_check_status_issue if issue_status
               end
               errors.add :base, :assigned_nil_status_on if assigned_nil? and freelance_role_on_without_assigned and check_error_pay
-              # errors.add :base, :stop_change_payments_details_deny if role_frelancer? and deny_edit_payments_details and freelance_field_exist
               errors.add :base, :stop_change_payments_details if payments_details_check_add and freelance_role_off and check_error_role
             end
           end
