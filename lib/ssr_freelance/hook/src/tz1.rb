@@ -131,23 +131,24 @@ def payment_info_non_change(data)
 end
 
 def change_payment_data(data)
-  check = true
-  if data[:params][:issue][:custom_field_values]
-    pay_issue_id = Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id']
-    pay_wallet_id = Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id']
-    data[:issue].custom_field_values.each do |item|
-      if item.custom_field.id == pay_issue_id.to_i
-        if item.value == data[:params][:issue][:custom_field_values][pay_issue_id]
-          check = false
-        end
-      end
-      if item.custom_field.id == pay_wallet_id.to_i
-        if item.value == data[:params][:issue][:custom_field_values][pay_wallet_id]
-          check = false
-        end
-      end
-    end
-  end
-  check
+  # check = true
+  # if data[:params][:issue][:custom_field_values]
+  #   pay_issue_id = Setting.plugin_freelance_helper['sunstrike_freelance_pay_issue_field_id']
+  #   pay_wallet_id = Setting.plugin_freelance_helper['sunstrike_freelance_pay_wallet_issue_field_id']
+  #   data[:issue].custom_field_values.each do |item|
+  #     if item.custom_field.id == pay_issue_id.to_i
+  #       if item.value == data[:params][:issue][:custom_field_values][pay_issue_id]
+  #         check = false
+  #       end
+  #     end
+  #     if item.custom_field.id == pay_wallet_id.to_i
+  #       if item.value == data[:params][:issue][:custom_field_values][pay_wallet_id]
+  #         check = false
+  #       end
+  #     end
+  #   end
+  # end
+  # check
+  false
 end
 

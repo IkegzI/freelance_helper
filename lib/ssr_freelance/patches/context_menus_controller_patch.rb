@@ -12,7 +12,7 @@ module SsrFreelance
       def ssr_issues
         if (@issues.size == 1)
           @issue = @issues.first
-          update_info_payment if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0'
+          # update_info_payment if Setting.plugin_freelance_helper['sunstrike_freelance_plugin_status'] == '0'
         end
         @issue_ids = @issues.map(&:id).sort
 

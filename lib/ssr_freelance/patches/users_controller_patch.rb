@@ -19,7 +19,7 @@ module SsrFreelance
         @user.pref.safe_attributes = params[:pref]
         if @user.save
           @user.pref.save
-          payment_change_on_freelance(@user)
+          # payment_change_on_freelance(@user)
 
           if was_activated
             Mailer.account_activated(@user).deliver

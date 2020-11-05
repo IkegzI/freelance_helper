@@ -76,8 +76,23 @@ class SsrFreelanceController < ApplicationController
         check = (Member.where(user_id: user.id).find_by(project_id: project.id).role_ids.map { |item| true if role_ids_custom.include?(item) }).compact.pop if Member.where(user_id: user.id).find_by(project_id: project.id)
       end
       if check or params[:freelance_role_custom] == '1'
-        user_pay_wallet = user.custom_values.find_by(custom_field_id: custom_field_wallet.id) || ''
-        user_pay_type = user.custom_values.find_by(custom_field_id: custom_field_type.id) || ''
+        issue = Issue.find_by(id: params[:issue_id])
+        if issue.present? and issue.assigned_to == user
+          user_pay_wallet_issue = issue.custom_field_values.select { |cf| cf.custom_field_id == custom_field_wallet_issue.id }.first
+          user_pay_type_issue = issue.custom_field_values.select { |cf| cf.custom_field_id == custom_field_type_issue.id }.first
+        end
+        if user_pay_wallet_issue.present?
+          user_pay_wallet = user_pay_wallet_issue
+        else
+          user_pay_wallet = user.custom_values.find_by(custom_field_id: custom_field_wallet.id) || ''
+        end
+
+        if user_pay_type_issue.present?
+          user_pay_type = user_pay_type_issue
+        else
+          user_pay_type = user.custom_values.find_by(custom_field_id: custom_field_type.id) || ''
+        end
+
       end
       # if params[:issue_id] != '' and change_assigned_user
       # if params[:issue_id] != ''
@@ -89,7 +104,6 @@ class SsrFreelanceController < ApplicationController
       #   end
       # end
     end
-
     # if check != []
     a << {number: custom_field_wallet_issue.id, value: user_pay_wallet == '' ? '' : user_pay_wallet.value}
     a << {number: custom_field_type_issue.id, value: user_pay_type == '' ? '' : user_pay_type.value}
